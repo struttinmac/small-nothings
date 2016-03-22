@@ -1,0 +1,81 @@
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"> 
+<head>
+<title>Image Slider</title>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:TemplateHidden msdt:dt="string">0</mso:TemplateHidden>
+<mso:MasterPageDescription msdt:dt="string"></mso:MasterPageDescription>
+<mso:ContentTypeId msdt:dt="string">0x0101002039C03B61C64EC4A04F5361F385106601</mso:ContentTypeId>
+<mso:TargetControlType msdt:dt="string">;#SearchResults;#</mso:TargetControlType>
+<mso:HtmlDesignAssociated msdt:dt="string">1</mso:HtmlDesignAssociated>
+<mso:HtmlDesignConversionSucceeded msdt:dt="string">True</mso:HtmlDesignConversionSucceeded>
+<mso:HtmlDesignStatusAndPreview msdt:dt="string">http://game5/sites/yohan/_catalogs/masterpage/Display Templates/Search/Control_SlidePicture.html, Conversion successful.</mso:HtmlDesignStatusAndPreview>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+	<script>
+		$includeScript(this.url, "~sitecollection/style library/Slider/js/jquery-1.8.3.min.js");
+		$includeCSS(this.url, "~sitecollection/style library/Slider/css/global.css"); 
+	</script>
+<div id="imageSliderControl">
+<!--#_if (!$isNull(ctx.ClientControl) && !$isNull(ctx.ClientControl.shouldRenderControl) && !ctx.ClientControl.shouldRenderControl()){return "";}
+ctx.ListDataJSONGroupsKey = "ResultTables";
+ctx["CurrentItems"] = ctx.ListData.ResultTables[0].ResultRows;
+var siteURL = SP.PageContextInfo.get_siteAbsoluteUrl();
+var loadingImageURL = siteURL + "/style library/slider/img/loading.gif";
+ctx.OnPostRender = function() {
+	$.getScript(siteURL + "/style library/Slider/js/slides.min.jquery.js", function(){
+		$(".image-slider .slides").slides({
+			preload: true,
+			preloadImage: loadingImageURL,
+			play: 5000,
+			pause: 2500,
+			hoverPause: true,
+			animationStart: function(current){
+				$('.caption').animate({
+					bottom:-35
+				},100);
+			},
+			animationComplete: function(current){
+				$('.caption').animate({
+					bottom:0
+				},200);
+			},
+			slidesLoaded: function() {
+				$('.caption').animate({
+					bottom:0
+				},200);
+			}
+		});
+		
+		$('.caption').hover(
+			function(){
+				$('.caption').animate({
+					height:$('.caption').height($('.caption').height() + 50)
+				},200);
+			}, 
+			function () {
+				$('.caption').animate({
+					height:$('.caption').height($('.caption').height() - 50)
+				},200);
+		});
+	});
+};_#-->
+	<div class="image-slider">
+		<div class="container">
+			<img src="_#= siteURL =#_/style library/slider/img/new-ribbon.png" width="112" height="112" alt="New Ribbon" class="ribbon">
+			<div class="slides">
+				<div class="slides_container">
+					_#= ctx.RenderItems(ctx) =#_
+				</div>
+				<a href="#" class="prev"><img src="_#= siteURL =#_/style library/slider/img/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a>
+				<a href="#" class="next"><img src="_#= siteURL =#_/style library/slider/img/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>
+			</div>
+			<img src="_#= siteURL =#_/style library/slider/img/example-frame.png" width="739" height="341" alt="Example Frame" class="frame">
+		</div>
+	</div>
+</div>
+</body>
+</html>
